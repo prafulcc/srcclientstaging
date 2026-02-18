@@ -28,7 +28,7 @@
 	});
 </script>
 
-<svelte:head>
+<!-- <svelte:head>
 	<!-- Primary Meta Tags -->
 	<title>Stemax Healthcare Consultancy | Occupational Health Services UK</title>
 	<meta name="title" content="Stemax Healthcare Consultancy | Occupational Health Services UK" />
@@ -124,7 +124,7 @@
 			]
 		}
 	</script>
-</svelte:head>
+</svelte:head> -->
 
 <Header />
 {@render children()}
