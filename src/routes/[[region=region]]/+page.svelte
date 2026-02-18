@@ -8,14 +8,22 @@
 	import StatsSection from '$lib/components/StatsSection.svelte';
 	import TestimonialSection from '$lib/components/TestimonialSection.svelte';
 	import StudiesSection from '$lib/components/StudiesSection.svelte';
+	import PVFSection from '$lib/components/PVFSection.svelte';
+	import Location from '$lib/components/Location.svelte';
+	import FAQSection from '$lib/components/FAQSection.svelte';
+	import VolunteerExp from '$lib/components/VolunteerExp.svelte';
+	import SponsorBanner from '$lib/components/SponsorBanner.svelte';
+	import { partnerLogos } from '$lib/data';
 </script>
 
 <Hero />
-<StatsSection />
-<FeatureSection />
+<SponsorBanner logos={partnerLogos} />
 <ServiceSection />
-<AboutSection />
-<TestimonialSection />
-<CtaSection />
-<ContactSection />
+<PVFSection />
+<Location />
+
+<VolunteerExp />
 <StudiesSection />
+<TestimonialSection />
+<FAQSection />
+<Location />

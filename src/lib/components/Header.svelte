@@ -1,6 +1,7 @@
 <script>
 	// Define primary color scheme based on emerald green
 	import { colors } from '$lib/data.js';
+	import RegionSwitcher from './RegionSwitcher.svelte';
 
 	let mobileMenuOpen = $state(false);
 
@@ -9,60 +10,42 @@
 	}
 </script>
 
+<RegionSwitcher />
 <header
 	class="sticky top-0 z-50 border-b border-gray-200 bg-white"
 	style="border-color: {colors.primaryLight}"
 >
-	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+	<div class="mx-auto max-w-7xl py-3">
 		<div class="flex h-16 items-center justify-between">
-			<div class="flex items-center">
-				<div class="text-2xl font-bold" style="color: {colors.primary}">
-					STEMAX
-					<span class="ml-2 text-sm font-normal" style="color: {colors.textLight}"
-						>Healthcare Consultancy</span
+			<div class="flex items-end gap-3">
+				<img src="/favicon.png" alt="STEMAX Logo" class="h-10 w-10" />
+				<div class="flex flex-col">
+					<span class="font-heading text-2xl leading-none font-bold tracking-tight text-slate-900">
+						STEMAX
+					</span>
+					<span
+						class="pt-1 text-xs leading-none font-light tracking-widest text-emerald-700 uppercase"
 					>
+						Clinical Research
+					</span>
 				</div>
 			</div>
 
-			<nav class="hidden items-center justify-end space-x-10 md:flex">
-				<a
-					href="#services"
-					class="text-base font-medium hover:text-emerald-700"
-					style="color: {colors.text}"
-				>
-					Services
+			<nav class="hidden items-center justify-end space-x-10 lg:flex">
+				<a href="#pharmacovigilance-solutions" class="text-base font-medium hover:text-emerald-700">
+					Pharmacovigilance Solutions
 				</a>
-				<a
-					href="#clinical-trials"
-					class="text-base font-medium hover:text-emerald-700"
-					style="color: {colors.text}"
-				>
-					Clinical Trials
+				<a href="#run-clinical-trials" class="text-base font-medium hover:text-emerald-700">
+					Run Clinical Trials
 				</a>
-				<a
-					href="#about"
-					class="text-base font-medium hover:text-emerald-700"
-					style="color: {colors.text}"
-				>
-					About Us
+				<a href="#volunteer-experience" class="text-base font-medium hover:text-emerald-700">
+					Volunteer In A Trial
 				</a>
-				<a
-					href="#testimonials"
-					class="text-base font-medium hover:text-emerald-700"
-					style="color: {colors.text}"
-				>
-					Testimonials
-				</a>
-				<a
-					href="#contact"
-					class="text-base font-medium hover:text-emerald-700"
-					style="color: {colors.text}"
-				>
-					Contact
-				</a>
+				<a href="#location" class="text-base font-medium hover:text-emerald-700"> Locate Clinic </a>
+				<a href="/" class="text-base font-medium hover:text-emerald-700"> Careers </a>
 			</nav>
 
-			<div class="flex md:hidden">
+			<div class="flex lg:hidden">
 				<button
 					type="button"
 					class="inline-flex items-center justify-center p-2"
@@ -106,7 +89,7 @@
 	</div>
 
 	{#if mobileMenuOpen}
-		<div class="md:hidden">
+		<div class="lg:hidden">
 			<div class="space-y-1 bg-white pt-2 pb-4">
 				<a
 					href="#services"
@@ -114,35 +97,28 @@
 					style="border-color: {colors.primary}; background-color: #f3f4f6"
 					onclick={toggleMobileMenu}
 				>
-					Services
+					Pharmacovigilance Solutions
 				</a>
 				<a
 					href="#clinical-trials"
 					class="block border-l-4 border-transparent px-4 py-2 text-base font-medium hover:bg-gray-50"
 					onclick={toggleMobileMenu}
 				>
-					Clinical Trials
+					Run Clinical Trials
 				</a>
 				<a
 					href="#about"
 					class="block border-l-4 border-transparent px-4 py-2 text-base font-medium"
 					onclick={toggleMobileMenu}
 				>
-					About Us
+					Volunteer In A Trial
 				</a>
 				<a
 					href="#testimonials"
 					class="block border-l-4 border-transparent px-4 py-2 text-base font-medium"
 					onclick={toggleMobileMenu}
 				>
-					Testimonials
-				</a>
-				<a
-					href="#contact"
-					class="block border-l-4 border-transparent px-4 py-2 text-base font-medium"
-					onclick={toggleMobileMenu}
-				>
-					Contact
+					Locate Clinic
 				</a>
 				<a
 					href="#book"
@@ -150,7 +126,7 @@
 					style="background-color: {colors.primary}; color: {colors.light}"
 					onclick={toggleMobileMenu}
 				>
-					Book Appointment
+					Careers
 				</a>
 			</div>
 		</div>

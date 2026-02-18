@@ -1,35 +1,38 @@
 <script>
 	import ServiceModal from './ServiceModal.svelte';
 
-	// Define colors for the component
-	import { colors } from '$lib/data.js';
-	import { services, serviceCategories, getAllServices, getCategoryLabel } from '$lib/data.js';
+	// Define colors and import centralized clinical data helper functions [cite: 12, 13]
+	import {
+		colors,
+		services,
+		serviceCategories,
+		getAllServices,
+		getCategoryLabel
+	} from '$lib/data.js';
 
-	// Service data from the PDF document
-
-	// Reactive state
+	// Reactive state for tabs, search, and modal [cite: 13, 14, 15]
 	let activeTab = $state('all');
 	let searchQuery = $state('');
-	let showAllServices = $state(false); // New state to track if we should show all services
-	let modalOpen = $state(false); // Track if the modal is open
-	let selectedServiceDetails = $state(null); // Store the selected service details for the modal
+	let showAllServices = $state(false);
+	let modalOpen = $state(false);
+	let selectedServiceDetails = $state(null); // [cite: 16]
 
 	// Function to open the modal with service details
 	function openServiceModal(service) {
-		selectedServiceDetails = service;
-		modalOpen = true;
+		selectedServiceDetails = service; // [cite: 16]
+		modalOpen = true; // [cite: 17]
 	}
 
 	// Function to close the modal
 	function closeModal() {
 		modalOpen = false;
-		selectedServiceDetails = null;
+		selectedServiceDetails = null; // [cite: 17, 18]
 	}
 
-	// Combine all services for the "All" tab
+	// Combine all services for the "All" tab [cite: 18]
 	const allServices = getAllServices();
 
-	// Filter function to apply to all services
+	// Filter function to apply to all services based on name and details [cite: 19, 20]
 	const filterBySearchQuery = (service) => {
 		const query = searchQuery.toLowerCase();
 		return (
@@ -38,16 +41,16 @@
 		);
 	};
 
-	// First filter all services by the search query, then filter by tab if needed
+	// First filter all services by the search query, then filter by tab if needed [cite: 20]
 	let filteredServices = $derived(
 		searchQuery
-			? allServices.filter(filterBySearchQuery) // When searching, always search across all services
-			: activeTab === 'all' // When not searching, respect the tab filter
+			? allServices.filter(filterBySearchQuery)
+			: activeTab === 'all'
 				? allServices
 				: services[activeTab]
 	);
 
-	// Limit services shown when in the "all" tab and not showing all
+	// Limit services shown when in the "all" tab and not showing all [cite: 21]
 	let displayedServices = $derived(
 		activeTab === 'all' && !showAllServices && !searchQuery
 			? filteredServices.slice(0, 10)
@@ -55,31 +58,29 @@
 	);
 </script>
 
-<section id="services" class="py-12 md:py-20">
+<section id="run-clinical-trials" class="py-12 md:py-20" style:background-color={colors.background}>
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<div class="mb-12 lg:text-center">
 			<h2 class="text-base font-semibold tracking-wide uppercase" style:color={colors.primary}>
-				Our Services
+				For Sponsors
 			</h2>
 			<p
 				class="mt-2 text-3xl leading-8 font-bold tracking-tight sm:text-4xl"
 				style:color={colors.secondary}
 			>
-				Comprehensive Healthcare Solutions
+				Clinical Trial Services
 			</p>
 			<p class="mt-4 max-w-2xl text-xl lg:mx-auto" style:color={colors.textLight}>
-				We offer a wide range of healthcare services to meet the needs of your business and
-				employees.
+				Expertise to handle any stage of the clinical research life-cycle.
 			</p>
 		</div>
 
 		<div class="mt-12">
-			<!-- Search Bar -->
 			<div class="mx-auto mb-8 max-w-md">
 				<div class="relative">
 					<input
 						type="text"
-						placeholder="Search services..."
+						placeholder="Search 30+ trial services..."
 						bind:value={searchQuery}
 						class="w-full border border-gray-300 px-4 py-2 focus:border-emerald-500 focus:outline-none"
 						style:border-color={colors.primary}
@@ -108,33 +109,24 @@
 			</div>
 
 			<div class="border-b border-gray-200">
-				<div class="flex overflow-x-auto md:justify-center">
+				<div class="scrollbar-hide flex overflow-x-auto md:justify-center">
 					{#each serviceCategories as category (category.id)}
 						<button
 							onclick={() => (activeTab = category.id)}
-							class="relative mt-2 flex-shrink-0 border-b-2 px-3 py-4 text-center text-sm font-medium sm:w-auto sm:px-6"
-							class:border-emerald-700={activeTab === category.id}
-							class:border-transparent={activeTab !== category.id}
-							class:text-emerald-700={activeTab === category.id}
-							class:text-gray-500={activeTab !== category.id}
-							class:hover:text-gray-700={activeTab !== category.id}
-							class:hover:border-gray-300={activeTab !== category.id}
-							style="border-color: {activeTab === category.id
-								? colors.primary
-								: 'transparent'}; color: {activeTab === category.id
-								? colors.primary
-								: colors.textLight}"
+							class="relative mt-2 flex-shrink-0 border-b-2 px-3 py-4 text-center text-sm font-medium transition-colors sm:w-auto sm:px-6"
+							style="border-color: {activeTab === category.id ? colors.primary : 'transparent'};
+								   color: {activeTab === category.id ? colors.primary : colors.textLight}"
 						>
 							{#if category.id === 'all'}
 								<span
-									class="absolute -top-2 left-1/2 flex h-5 w-auto -translate-x-1/2 transform items-center justify-center rounded-full bg-emerald-700 px-1.5 text-xs text-white"
+									class="absolute -top-2 left-1/2 flex h-5 w-auto -translate-x-1/2 transform items-center justify-center px-1.5 text-xs text-white"
 									style:background-color={colors.primary}
 								>
 									{allServices.length}
 								</span>
 							{:else if services[category.id]}
 								<span
-									class="absolute -top-2 left-1/2 flex h-5 w-auto -translate-x-1/2 transform items-center justify-center rounded-full bg-emerald-700 px-1.5 text-xs text-white"
+									class="absolute -top-2 left-1/2 flex h-5 w-auto -translate-x-1/2 transform items-center justify-center px-1.5 text-xs text-white"
 									style:background-color={activeTab === category.id
 										? colors.primary
 										: colors.textLight}
@@ -149,13 +141,16 @@
 			</div>
 
 			{#if filteredServices.length === 0}
-				<div class="mt-8 border border-gray-200 py-12 text-center">
+				<div
+					class="mt-8 border border-gray-200 py-12 text-center"
+					style:background-color={colors.light}
+				>
 					<p class="text-lg" style:color={colors.textLight}>
 						No services found matching your search criteria.
 					</p>
 					<button
 						onclick={() => (searchQuery = '')}
-						class="mt-4 px-4 py-2 text-white"
+						class="mt-4 px-6 py-2 text-white transition-opacity hover:opacity-90"
 						style:background-color={colors.primary}
 					>
 						Clear Search
@@ -165,84 +160,45 @@
 				<div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 					{#each displayedServices as service (service.name)}
 						<div
-							class="flex h-full flex-col border border-gray-200 shadow-sm"
-							style:background-color={colors.light}
+							class="group relative flex h-full flex-col overflow-hidden border border-gray-200 transition-shadow hover:shadow-md"
 						>
-							<div class="flex-grow p-6">
+							<div
+								class="flex-grow p-6 transition-transform duration-300 group-hover:-translate-y-2"
+							>
 								<div class="flex items-start justify-between">
 									<div>
 										<div class="mb-2 flex items-center gap-2">
-											<h3 class="text-lg font-semibold" style:color={colors.text}>
+											<h3 class="text-lg font-semibold capitalize" style:color={colors.text}>
 												{service.name}
 											</h3>
 										</div>
 										{#if service.category}
-											<p class="mb-2 text-xs" style:color={colors.textLight}>
+											<p
+												class="mb-2 text-sm font-medium tracking-wide"
+												style:color={colors.primary}
+											>
 												{getCategoryLabel(service.category)}
 											</p>
 										{/if}
-										<p class="text-xl font-bold" style:color={colors.primary}>{service.price}</p>
 									</div>
-								</div>
-
-								<div class="mt-2 flex items-center gap-2 text-sm" style:color={colors.textLight}>
-									<!-- Clock icon -->
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										class="h-4 w-4"
-										width="24"
-										height="24"
-										viewBox="0 0 24 24"
-										fill="none"
-										stroke="currentColor"
-										stroke-width="2"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-									>
-										<circle cx="12" cy="12" r="10"></circle>
-										<polyline points="12 6 12 12 16 14"></polyline>
-									</svg>
-									<span>{service.duration}</span>
 								</div>
 
 								{#if service.details}
-									<p class="mt-3 text-sm" style:color={colors.text}>
+									<p class="mt-3 text-sm leading-relaxed" style:color={colors.textLight}>
 										{service.details}
 									</p>
 								{/if}
-
-								{#if service.doses}
-									<div class="mt-4 flex items-center gap-2">
-										<!-- Check icon -->
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											class="h-4 w-4"
-											width="24"
-											height="24"
-											viewBox="0 0 24 24"
-											fill="none"
-											stroke="currentColor"
-											stroke-width="2"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											style:color={colors.primary}
-										>
-											<polyline points="20 6 9 17 4 12"></polyline>
-										</svg>
-										<span class="text-sm"
-											>{service.doses} {service.doses === 1 ? 'dose' : 'doses'} required</span
-										>
-									</div>
-								{/if}
 							</div>
 
-							<div class="mt-auto border-t border-gray-200 px-6 py-4">
+							<div
+								class="absolute right-0 bottom-0 left-0 translate-y-full px-6 py-4 transition-transform duration-300 ease-in-out group-hover:translate-y-0"
+							>
 								<button
 									onclick={() => openServiceModal(service)}
-									class="flex w-full items-center justify-center border border-transparent px-4 py-2 text-sm font-medium text-white"
+									class="flex w-full items-center justify-center border border-transparent px-4 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
 									style:background-color={colors.primary}
 								>
-									Book Appointment
+									Learn More
 								</button>
 							</div>
 						</div>
@@ -250,19 +206,19 @@
 
 					{#if activeTab === 'all' && !showAllServices && !searchQuery && filteredServices.length > 10}
 						<button
-							class="flex h-full cursor-pointer flex-col items-center justify-center border border-dashed border-gray-200 p-6"
+							class="flex h-full cursor-pointer flex-col items-center justify-center border border-dashed border-gray-300 p-6 transition-colors hover:bg-gray-50"
 							onclick={() => (showAllServices = true)}
-							style="background-color: rgba(4, 120, 87, 0.05)"
+							style:background-color={colors.light}
 						>
 							<div class="text-center">
 								<p class="mb-2 text-lg font-medium" style:color={colors.primary}>
 									View All Services
 								</p>
-								<p class="mb-4 text-sm text-gray-500">
+								<p class="mb-4 text-sm" style:color={colors.textLight}>
 									{filteredServices.length - 10} more services available
 								</p>
 								<div
-									class="inline-flex h-10 w-10 items-center justify-center rounded-full"
+									class="inline-flex h-10 w-10 items-center justify-center"
 									style:background-color={colors.primary}
 								>
 									<svg
@@ -286,30 +242,33 @@
 				</div>
 			{/if}
 
-			<div class="mt-10 text-center">
-				<a
-					href="#book"
-					class="inline-flex items-center justify-center border border-transparent px-8 py-3 text-base font-medium text-white"
-					style:background-color={colors.primary}
-				>
-					Book a Service
-					<!-- Arrow right icon -->
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="ml-2 h-5 w-5"
-						width="24"
-						height="24"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					>
-						<line x1="5" y1="12" x2="19" y2="12"></line>
-						<polyline points="12 5 19 12 12 19"></polyline>
-					</svg>
-				</a>
+			<div class="relative mt-16 overflow-hidden p-8 text-center sm:p-12">
+				<div class="cta-background"></div>
+
+				<div class="relative z-10">
+					<h3 class="text-2xl font-bold text-white sm:text-3xl">
+						Ready to discuss your clinical trial?
+					</h3>
+					<p class="mx-auto mt-4 max-w-2xl text-lg text-gray-200">
+						Connect with our experts to discuss how our integrated services can streamline your
+						development timeline.
+					</p>
+					<div class="mt-8 flex flex-col items-center justify-center gap-6 sm:flex-row">
+						<a
+							href="/contact"
+							class="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white transition-opacity hover:opacity-90"
+							style:background-color={colors.primary}
+						>
+							Contact Us
+						</a>
+						<a
+							href="/case-studies"
+							class="text-base font-semibold text-white transition-colors hover:opacity-80"
+						>
+							View Case Studies
+						</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -321,3 +280,22 @@
 		onClose={closeModal}
 	/>
 </section>
+
+<style>
+	.cta-background {
+		position: absolute; /* [cite: 28] */
+		top: 0; /* [cite: 29] */
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 0;
+		/* Using the same image and dark tint for consistency across the page [cite: 30] */
+		background-image:
+			linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+			url('https://unsplash.com/photos/3m1h6CgfLL8/download?force=true&w=2400');
+		background-size: cover; /* [cite: 31] */
+		background-position: center;
+		filter: blur(2px);
+		transform: scale(1.1); /* Prevents white bleed at the edges from the blur [cite: 31] */
+	}
+</style>

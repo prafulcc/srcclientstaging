@@ -1,3 +1,39 @@
+import { Rocket, Users, ShieldCheck, Database, MapPinPlus, Gavel } from '@lucide/svelte';
+
+export const partnerLogos = [
+	{ name: 'Moderna', src: '/logos/moderna.png' },
+	{ name: 'Biohaven', src: '/logos/biohaven-pharmaceuticals.png' },
+	{ name: 'Accelsiors', src: '/logos/accelsiors.png' },
+	{ name: 'CRPN', src: '/logos/clinical-research-payment-network.png' }
+];
+
+export const regulatoryLogos = [
+	{
+		name: 'MHRA',
+		src: 'https://assets.publishing.service.gov.uk/media/5b2cbf31e5274a55dc9b0229/s960_MHRA-logo-960px.jpg'
+	},
+	{
+		name: 'FDA',
+		src: 'https://upload.wikimedia.org/wikipedia/commons/4/43/Logo_of_the_United_States_Food_and_Drug_Administration.svg'
+	},
+	{
+		name: 'EMA',
+		src: 'https://www.ema.europa.eu/themes/custom/ema_theme/resources/images/logo_ema.svg'
+	},
+	{
+		name: 'NHS HRA',
+		src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Health_Research_Authority_logo.svg/1280px-Health_Research_Authority_logo.svg.png'
+	},
+	{
+		name: 'NICE',
+		src: 'https://www.hdruk.ac.uk/wp-content/uploads/2024/01/NICE-logo-e1704811229663.png'
+	},
+	{
+		name: 'OHRP',
+		src: 'https://www.hhs.gov/ohrp/sites/default/files/ohrp-logo191.png'
+	}
+];
+
 export const colors = {
 	primary: '#047857', // emerald-700
 	primaryDark: '#065f46', // emerald-800
@@ -9,332 +45,192 @@ export const colors = {
 	textLight: '#64748b' // slate-500
 };
 
-// Centralized services data for the application
+// Centralized clinical research services data
 export const services = {
-	vaccines: [
+	'study-startup': [
 		{
-			name: 'Hepatitis B',
-			price: '£55.00',
-			duration: '0, 1 & 6 months',
-			doses: 3,
-			booster: '5 years',
-			details: 'Protects against Hepatitis B virus that can cause liver inflammation and damage.'
-		},
-		{
-			name: 'Hepatitis B + Nurse visit',
-			price: '£60.00',
-			duration: '0, 1 & 6 months',
-			doses: 3
-		},
-		{
-			name: 'MMR (Measles/Mumps/Rubella)',
-			price: '£70.00',
-			duration: 'Two doses required',
-			doses: 2,
+			name: 'Assisted trial design',
 			details:
-				'Protects against measles, mumps, and rubella viruses which can cause serious complications.'
+				'Strategic consultation to optimize your study endpoints and methodology for maximum clinical impact.'
 		},
 		{
-			name: 'MMR + Nurse visit',
-			price: '£75.00',
-			duration: 'Two doses required',
-			doses: 2
-		},
-		{
-			name: 'Chicken Pox (varicella)',
-			price: '£70.00',
-			duration: 'Two doses required',
-			doses: 2,
-			details: 'Provides immunity against the varicella virus which causes chickenpox.'
-		},
-		{
-			name: 'Chicken Pox + Nurse visit',
-			price: '£75.00',
-			duration: 'Two doses required',
-			doses: 2
-		},
-		{
-			name: 'Mantoux Test & Read (skin test)',
-			price: '£70.00',
-			duration: 'Test 1st day, Reading at 72 hrs'
-		},
-		{
-			name: 'Mantoux Test & Read + Nurse visit',
-			price: '£80.00',
-			duration: 'Test 1st day, Reading at 72 hrs'
-		},
-		{
-			name: 'BCG TB vaccines',
-			price: '£45.00',
-			duration: 'One dose',
-			doses: 1
-		},
-		{
-			name: 'BCG Scar verify',
-			price: '£35.00',
-			duration: 'One visit'
-		}
-	],
-	immune: [
-		{
-			name: 'Immune Booster (single)',
-			price: '£150.00',
-			duration: 'One session',
-			doses: 1,
-			details: 'Vitamin and mineral IV therapy to help boost your immune system.'
-		},
-		{
-			name: 'Immune Booster (5 sessions)',
-			price: '£650.00',
-			duration: 'Five sessions',
-			doses: 5
-		},
-		{
-			name: 'Vit C (10g) + glutathione (600mg)',
-			price: '£110.00',
-			duration: 'One session',
-			doses: 1,
-			details: 'High-dose vitamin C combined with glutathione for antioxidant support.'
-		},
-		{
-			name: 'Myers Cocktail',
-			price: '£170.00',
-			duration: 'One session',
-			doses: 1,
+			name: 'Protocol writing',
 			details:
-				'A nutrient cocktail given intravenously to help with various health conditions and improve energy.'
+				'Developing scientifically rigorous and regulatory-compliant protocols tailored to your specific therapeutic area.'
 		},
 		{
-			name: 'Glutathione 1200mg (alone)',
-			price: '£80.00',
-			duration: 'One session',
-			doses: 1
-		},
-		{
-			name: 'B12 Methylcobalamin 5mg / 1ml',
-			price: '£40.00',
-			duration: 'One injection',
-			doses: 1
-		}
-	],
-	occupational: [
-		{
-			name: 'Safety Critical Medical Assessment',
-			price: 'POA',
-			duration: 'One session',
-			details: 'Comprehensive medical assessment for safety-critical roles.'
-		},
-		{
-			name: 'HGV/LGV/PSV medical',
-			price: '£50.00',
-			duration: 'One session',
+			name: 'Site feasibility, selection, training and initiation',
 			details:
-				'Medical assessment required for Heavy Goods Vehicle, Large Goods Vehicle, or Public Service Vehicle licenses.'
+				'Identifying high-performing sites and ensuring teams are fully equipped to meet enrollment and safety targets.'
 		},
 		{
-			name: 'Pre-employment health questionnaire (paper-screen only)',
-			price: '£25.00',
-			duration: 'One assessment'
-		},
-		{
-			name: 'Pre-employment health questionnaire with follow up',
-			price: '£100.00',
-			duration: 'Assessment with telephone consult'
-		},
-		{
-			name: 'Preemployment (fitness for work) medical assessment',
-			price: '£140.00',
-			duration: 'One session'
-		},
-		{
-			name: 'Oil & Gas UK (OGUK) medical',
-			price: '£200.00',
-			duration: 'One session'
-		},
-		{
-			name: 'Oil & Gas UK (OGUK) medical plus ERT',
-			price: '£250.00',
-			duration: 'One session'
-		},
-		{
-			name: 'Oil & Gas UK (OGUK) medical plus Fit to train',
-			price: '£300.00',
-			duration: 'One session'
-		},
-		{
-			name: 'In water Fit to Train medicals',
-			price: '£120.00',
-			duration: 'One session'
-		},
-		{
-			name: 'Working at height medicals',
-			price: '£100.00',
-			duration: 'One session'
-		},
-		{
-			name: 'HSE diving medical',
-			price: '£150.00',
-			duration: 'One session'
-		},
-		{
-			name: 'Padi diving medical',
-			price: '£60.00',
-			duration: 'One session'
-		}
-	],
-	bloodtests: [
-		{
-			name: 'Full blood Count',
-			price: '£40.00',
-			duration: 'One test',
+			name: 'IRB/ethics and regulatory submissions',
 			details:
-				'Measures several components of your blood including red and white blood cells, and platelets.'
+				'Navigating complex global submission pathways to secure rapid approvals and maintain study timelines.'
 		},
 		{
-			name: 'Biochemistry plus liver function tests',
-			price: '£45.00',
-			duration: 'One test',
-			details: 'Comprehensive blood test assessing liver function and general biochemistry markers.'
+			name: 'CTMS configuration and UAT',
+			details:
+				'Setting up robust Clinical Trial Management Systems with thorough User Acceptance Testing for flawless operations.'
 		},
 		{
-			name: 'Hepatitis B antibody (post immunisation)',
-			price: '£50.00',
-			duration: 'One test'
-		},
-		{
-			name: 'Hepatitis B core antibodies',
-			price: '£50.00',
-			duration: 'One test'
-		},
-		{
-			name: 'Hepatitis A antibodies',
-			price: '£45.00',
-			duration: 'One test'
-		},
-		{
-			name: 'Measles, Mumps, Rubella antibodies',
-			price: '£100.00',
-			duration: 'One test'
-		},
-		{
-			name: 'Chicken pox (Varicella) antibodies',
-			price: '£45.00',
-			duration: 'One test'
-		},
-		{
-			name: 'TB Quantiferon Gold',
-			price: '£70.00',
-			duration: 'One test'
-		},
-		{
-			name: 'Drug test 10 part',
-			price: '£45.00',
-			duration: 'One test'
-		},
-		{
-			name: 'Alcohol test',
-			price: '£25.00',
-			duration: 'One test'
+			name: 'Study plans',
+			details:
+				'Crafting detailed operational roadmaps that align stakeholders and define clear paths to project milestones.'
 		}
 	],
-	consultation: [
+	'patient-recruitment': [
 		{
-			name: '60 minutes Physician Consultation',
-			price: '£260.00',
-			duration: 'One consultation'
+			name: 'EMR databank querying',
+			details:
+				'Utilizing advanced Electronic Medical Record data to identify eligible participants with precision and speed.'
 		},
 		{
-			name: '30 minutes Physician Consultation',
-			price: '£120.00',
-			duration: 'One consultation'
+			name: 'Central digital advertising',
+			details:
+				'Running targeted multi-channel campaigns to reach diverse patient populations across digital platforms.'
 		},
 		{
-			name: '60 minutes Nutritional Consultation',
-			price: '£120.00',
-			duration: 'One consultation'
+			name: 'On-site patient recruitment',
+			details:
+				'Deploying specialist teams directly to clinical sites to facilitate face-to-face engagement and enrollment.'
 		},
 		{
-			name: '30 minutes Nutritional Consultation',
-			price: '£60.00',
-			duration: 'One consultation'
+			name: 'Study websites and marketing materials',
+			details:
+				'Designing patient-centric digital portals and high-quality printed materials to boost trial visibility.'
 		},
 		{
-			name: '60 minutes Psychological counselling',
-			price: '£100.00',
-			duration: 'One consultation'
+			name: 'Patient concierge',
+			details:
+				'Providing dedicated support to participants to reduce burden and improve long-term study retention.'
 		},
 		{
-			name: '30 minutes Psychological counselling',
-			price: '£60.00',
-			duration: 'One consultation'
+			name: 'Pre-screening',
+			details:
+				'Implementing rigorous initial vetting processes to ensure only the most qualified candidates reach the site.'
 		}
 	],
-	diagnostic: [
+	'study-management': [
 		{
-			name: 'Basic (Core Diagnostic test) FDx01',
-			price: '£175.00',
-			duration: 'One test'
+			name: 'Project management',
+			details:
+				'Proactive oversight of timelines, budgets, and resources to keep your clinical trial on track and within scope.'
 		},
 		{
-			name: 'Comprehensive (Maximum Diagnostic test) FDx02',
-			price: '£340.00',
-			duration: 'One test'
+			name: 'Monitoring',
+			details:
+				'Comprehensive clinical monitoring to ensure data integrity and strict adherence to GCP standards.'
 		},
 		{
-			name: 'Vital (Diagnostic test) FDx03',
-			price: '£285.00',
-			duration: 'One test'
+			name: 'Vendor management',
+			details:
+				'Seamless coordination with IMP providers, central labs, and IRT vendors for integrated trial delivery.'
 		},
 		{
-			name: 'Thyroid (CoreDiagnostic test) FDx14',
-			price: '£200.00',
-			duration: 'One test'
+			name: 'TMF management',
+			details:
+				'Maintaining a complete and "inspection-ready" Trial Master File throughout the entire study lifecycle.'
 		},
 		{
-			name: 'Thyroid (VitalDiagnostic test) FDx15',
-			price: '£340.00',
-			duration: 'One test'
+			name: 'Pharmacovigilance',
+			details:
+				'Continuous safety monitoring and reporting to protect participant well-being and meet regulatory duties.'
 		},
 		{
-			name: 'Female Health FDx18',
-			price: '£380.00',
-			duration: 'One test'
+			name: 'Medical monitoring',
+			details:
+				'Expert medical oversight to provide real-time guidance on safety signals and eligibility queries.'
+		}
+	],
+	'data-management': [
+		{
+			name: 'Database locks',
+			details:
+				'Executing timely and accurate database locks to prepare your data for final analysis and reporting.'
 		},
 		{
-			name: 'Male Health FDx19',
-			price: '£350.00',
-			duration: 'One test'
+			name: 'Data delivery in CDISC SDTM-like format',
+			details:
+				'Providing high-quality datasets structured for immediate submission to global regulatory authorities.'
 		},
 		{
-			name: 'Vitamins FDx04',
-			price: '£70.00',
-			duration: 'One test'
+			name: 'Data standardization',
+			details:
+				'Harmonizing disparate data sources into a unified, consistent format for cleaner analysis.'
+		},
+		{
+			name: 'Biostatistics and Programming',
+			details:
+				'Advanced statistical modeling and programming to extract meaningful insights from your clinical data.'
+		},
+		{
+			name: 'Medical writing',
+			details:
+				'Crafting clear, professional Clinical Study Reports (CSRs) and summaries for regulatory review.'
+		}
+	],
+	'site-management': [
+		{
+			name: 'On-site Principal Investigators and Clinical Research Coordinators',
+			details:
+				'Providing experienced clinical leadership and staff to manage day-to-day trial activities effectively.'
+		},
+		{
+			name: 'Local Primary Care Physician and GP Sites',
+			details:
+				'Expanding your reach by leveraging community-based medical practices for broader accessibility.'
+		},
+		{
+			name: 'Speciality Sites',
+			details:
+				'Accessing specialized expertise across Neurology, Dermatology, Endocrinology, and other therapeutic areas.'
+		},
+		{
+			name: 'Mobile Phlebotomy and Nursing',
+			details:
+				'Bringing the trial to the patient with mobile services to increase convenience and data quality.'
+		}
+	],
+	'regulatory-affairs': [
+		{
+			name: 'Legal Representation within the UK, USA and EU',
+			details:
+				'Acting as your authorized legal representative to ensure compliance for foreign-sponsored trials.'
+		},
+		{
+			name: 'Health Authority Interface',
+			details:
+				'Managing all communications and negotiations with agencies like the FDA, EMA, and MHRA.'
+		},
+		{
+			name: 'Response Management',
+			details:
+				'Coordinating rapid, technical responses to health authority queries to prevent trial delays.'
+		},
+		{
+			name: 'Approval Tracking',
+			details:
+				'Monitoring global regulatory statuses in real-time to provide clarity on your market entry timeline.'
 		}
 	]
 };
 
-// Service categories for UI display
+// Service categories for UI display, updated with icons
 export const serviceCategories = [
 	{ id: 'all', label: 'All Services' },
-	{ id: 'vaccines', label: 'Vaccinations' },
-	{ id: 'immune', label: 'Immune Support' },
-	{ id: 'occupational', label: 'Occupational Health' },
-	{ id: 'bloodtests', label: 'Blood Tests' },
-	{ id: 'consultation', label: 'Consultations' },
-	{ id: 'diagnostic', label: 'Diagnostic Tests' }
+	{ id: 'study-startup', label: 'Study Startup', icon: Rocket },
+	{ id: 'patient-recruitment', label: 'Patient Recruitment', icon: Users },
+	{ id: 'study-management', label: 'Study Management', icon: ShieldCheck },
+	{ id: 'data-management', label: 'Data Management', icon: Database },
+	{ id: 'site-management', label: 'Site Management', icon: MapPinPlus },
+	{ id: 'regulatory-affairs', label: 'Regulatory Affairs', icon: Gavel }
 ];
 
-// Helper function to get category label from category ID
+// Helper function to get category label from category ID dynamically
 export function getCategoryLabel(categoryId) {
-	const categoryMap = {
-		vaccines: 'Vaccination',
-		immune: 'Immune Support',
-		occupational: 'Occupational Health',
-		bloodtests: 'Blood Test',
-		consultation: 'Consultation',
-		diagnostic: 'Diagnostic Test'
-	};
-	return categoryMap[categoryId] || '';
+	const category = serviceCategories.find((c) => c.id === categoryId);
+	return category ? category.label : '';
 }
 
 // Get all services as a flat array with category information

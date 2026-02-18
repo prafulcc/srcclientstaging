@@ -6,7 +6,7 @@
 	const currentYear = new Date().getFullYear();
 </script>
 
-<footer class="border-t border-gray-200 py-8" style:background-color={colors.secondary}>
+<footer class="border-t border-gray-200 bg-black py-8 text-white">
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<div class="grid grid-cols-1 gap-8 md:grid-cols-4">
 			<div>
@@ -32,7 +32,7 @@
 						<img
 							src="cqc.png"
 							alt="CQC Regulated"
-							class="h-[25px] w-auto rounded border-2 border-gray-400 transition-colors hover:border-white"
+							class="h-[25px] w-auto border-2 border-gray-400 transition-colors hover:border-white"
 						/>
 					</a>
 				</div>

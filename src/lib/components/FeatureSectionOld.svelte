@@ -1,16 +1,15 @@
 <script>
-	// Imported specific Lucide icons relevant to clinical research
+	// Imported specific Lucide icons relevant to clinical research [cite: 1]
 	import { Rocket, Users, ShieldCheck, Database, MapPinPlus, Gavel } from '@lucide/svelte';
 
-	// Define colors object as in the original React component
+	// Define colors object as in the original React component [cite: 1]
 	import { colors } from '$lib/data.js';
 
-	// Features data updated with specific icon components and Unsplash banner images
+	// Features data updated with specific icon components
 	let features = [
 		{
 			title: 'Study Startup',
 			icon: Rocket, // Represents launch and initiation
-			image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80',
 			points: [
 				'Assisted trial design',
 				'Protocol writing',
@@ -23,7 +22,6 @@
 		{
 			title: 'Patient Recruitment',
 			icon: Users, // Represents patient populations and recruitment
-			image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80',
 			points: [
 				'EMR databank querying',
 				'Central digital advertising',
@@ -36,7 +34,6 @@
 		{
 			title: 'Study Management',
 			icon: ShieldCheck, // Represents oversight, safety, and pharmacovigilance
-			image: 'https://unsplash.com/photos/QiIxg_q2vh0/download?force=true&w=640',
 			points: [
 				'Project management',
 				'Monitoring',
@@ -49,7 +46,6 @@
 		{
 			title: 'Data Management',
 			icon: Database, // Represents database locks and data standardization
-			image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
 			points: [
 				'Database locks',
 				'Data delivery in CDISC SDTM-like format',
@@ -60,8 +56,7 @@
 		},
 		{
 			title: 'Site Management',
-			icon: MapPinPlus,
-			image: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=800&q=80',
+			icon: MapPinPlus, // Represents database locks and data standardization
 			points: [
 				'On-site Principal Investigators and Clinical Research Coordinators',
 				'Local Primary Care Physician and GP Sites',
@@ -71,8 +66,7 @@
 		},
 		{
 			title: 'Regulatory Affairs',
-			icon: Gavel,
-			image: 'https://unsplash.com/photos/DZpc4UY8ZtY/download?force=true&w=640',
+			icon: Gavel, // Represents database locks and data standardization
 			points: [
 				'Legal Representation within the UK, USA and EU for foreign sponsors',
 				'Health Authority Interface',
@@ -101,39 +95,24 @@
 		</div>
 
 		<div class="mt-10">
-			<div class="md:grid md:grid-cols-3 md:gap-6">
+			<div class="md:grid md:grid-cols-3 md:gap-8">
 				{#each features as feature}
-					<div
-						class="mt-4 flex flex-col overflow-hidden border border-gray-200 hover:bg-white md:mt-0"
-					>
-						<div class="relative h-30 w-full">
-							<img
-								src={feature.image}
-								alt={feature.title}
-								class="absolute inset-0 h-full w-full object-cover"
-							/>
-
+					<div class="mt-4 flex border border-gray-200 p-6 md:mt-0">
+						<div class="flex-shrink-0">
 							<div
-								class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"
-							></div>
-
-							<div class="absolute bottom-0 left-0 flex w-full items-center gap-4 p-4">
-								<div
-									class="flex h-10 w-10 flex-shrink-0 items-center justify-center text-white"
-									style:background-color={colors.primary}
-								>
-									<svelte:component this={feature.icon} class="h-5 w-5" />
-								</div>
-								<h3 class="text-lg font-medium text-white shadow-sm">
-									{feature.title}
-								</h3>
+								class="flex h-12 w-12 items-center justify-center text-white"
+								style:background-color={colors.primary}
+							>
+								<svelte:component this={feature.icon} class="h-6 w-6" />
 							</div>
 						</div>
-
-						<div class="flex flex-1 flex-col p-6 pt-5">
-							<ul class="list-disc space-y-1 pl-5" style:color={colors.textLight}>
+						<div class="ml-4">
+							<h3 class="text-lg font-medium" style:color={colors.text}>
+								{feature.title}
+							</h3>
+							<ul class="mt-2 list-disc space-y-1 pl-5" style:color={colors.textLight}>
 								{#each feature.points as point}
-									<li class="text-base">{point}</li>
+									<li class="text-sm">{point}</li>
 								{/each}
 							</ul>
 						</div>
@@ -149,12 +128,10 @@
 				<h3 class="text-2xl font-bold text-white sm:text-3xl">
 					Ready to discuss your clinical trial?
 				</h3>
-
 				<p class="mx-auto mt-4 max-w-2xl text-lg text-gray-200">
 					Connect with our experts to discuss how our integrated services can streamline your
 					development timeline.
 				</p>
-
 				<div class="mt-8 flex flex-col items-center justify-center gap-6 sm:flex-row">
 					<a
 						href="/contact"
@@ -163,7 +140,6 @@
 					>
 						Contact Us
 					</a>
-
 					<a
 						href="/case-studies"
 						class="text-base font-semibold text-white transition-colors hover:opacity-80"

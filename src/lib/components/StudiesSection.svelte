@@ -1,7 +1,8 @@
 <script>
 	import { colors } from '$lib/data.js';
-	import { ExternalLink, Phone, ClipboardCheck } from 'lucide-svelte';
+	import { ClipboardCheck, ExternalLink, Phone, MessageSquare } from 'lucide-svelte';
 
+	// Studies data preserved from original source
 	const studies = [
 		{
 			title: 'Chronic Obstructive Pulmonary Disease (COPD)',
@@ -34,87 +35,79 @@
 	];
 </script>
 
-<section id="studies" class="py-20" style="background-color: {colors.background}">
+<section id="studies" class="py-12 md:py-20" style:background-color={colors.background}>
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-		<div class="mb-12 text-center">
-			<h2 class="text-3xl font-bold tracking-tight sm:text-4xl" style="color: {colors.secondary}">
-				Current Clinical Trials
+		<div class="mb-12 lg:text-center">
+			<h2 class="text-base font-semibold tracking-wide uppercase" style:color={colors.primary}>
+				Current Enrollment
 			</h2>
-			<p class="mt-4 text-lg" style="color: {colors.textLight}">
-				Participate in medical research to help pave the way for future treatments.
+			<p
+				class="mt-2 text-3xl leading-8 font-bold tracking-tight sm:text-4xl"
+				style:color={colors.secondary}
+			>
+				Active Opportunities
+			</p>
+			<p class="mt-4 max-w-2xl text-xl lg:mx-auto" style:color={colors.textLight}>
+				Access cutting-edge pharmaceuticals, get paid for your time.
 			</p>
 		</div>
 
-		<div class="grid gap-8 md:grid-cols-2">
-			{#each studies as study (study.title)}
-				<div
-					class="flex flex-col rounded-2xl border bg-white p-8 shadow-sm transition-shadow hover:shadow-md"
-					style="border-color: {colors.primaryLight}33"
-				>
-					<div class="mb-4 flex items-center justify-between">
-						<span
-							class="rounded-full px-3 py-1 text-xs font-semibold"
-							style="background-color: {study.status === 'Enrolling'
-								? colors.primary + '22'
-								: '#fee2e2'};
-									 color: {study.status === 'Enrolling' ? colors.primary : '#ef4444'}"
-						>
-							{study.status}
-						</span>
+		<div class="mt-10">
+			<div class="md:grid md:grid-cols-2 md:gap-8">
+				{#each studies as study}
+					<div class="mt-4 flex border border-gray-200 bg-white p-6 md:mt-0">
+						<div class="flex-shrink-0">
+							<div
+								class="flex h-12 w-12 items-center justify-center text-white"
+								style:background-color={study.status === 'Enrolling' ? colors.primary : '#9ca3af'}
+							>
+								<ClipboardCheck class="h-6 w-6" />
+							</div>
+						</div>
+						<div class="ml-4 flex flex-col">
+							<div class="mb-3">
+								<span
+									class="inline-block px-2.5 py-0.5 text-xs font-semibold tracking-wider uppercase"
+									style="background-color: {study.status === 'Enrolling'
+										? colors.primary + '22'
+										: '#f3f4f6'};
+										   color: {study.status === 'Enrolling' ? colors.primary : '#6b7280'}"
+								>
+									{study.status}
+								</span>
+							</div>
+
+							<div class="mb-2 flex items-center justify-between">
+								<h3 class="text-lg font-medium" style:color={colors.text}>
+									{study.title}
+								</h3>
+							</div>
+
+							<p class="mb-6 flex-grow text-sm" style:color={colors.textLight}>
+								{study.description}
+							</p>
+
+							{#if study.link && study.status === 'Enrolling'}
+								<a
+									href={study.link}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="inline-flex w-fit items-center justify-center px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90"
+									style:background-color={colors.primary}
+								>
+									Volunteer Now <ExternalLink class="ml-2 h-4 w-4" />
+								</a>
+							{:else}
+								<button
+									disabled
+									class="inline-flex w-fit cursor-not-allowed items-center justify-center bg-gray-100 px-4 py-2 text-sm font-medium text-gray-400"
+								>
+									View Impact
+								</button>
+							{/if}
+						</div>
 					</div>
-
-					<h3 class="mb-3 text-xl font-bold" style="color: {colors.secondary}">
-						{study.title}
-					</h3>
-
-					<p class="mb-6 flex-grow text-base" style="color: {colors.text}">
-						{study.description}
-					</p>
-
-					{#if study.link && study.status === 'Enrolling'}
-						<a
-							href={study.link}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold text-white transition-colors"
-							style="background-color: {colors.primary}; hover:background-color: {colors.primaryDark}"
-						>
-							Register Interest <ExternalLink class="ml-2 h-4 w-4" />
-						</a>
-					{:else}
-						<button
-							disabled
-							class="inline-flex cursor-not-allowed items-center justify-center rounded-lg bg-gray-100 px-4 py-2 text-sm font-semibold text-gray-400"
-						>
-							Registration Closed
-						</button>
-					{/if}
-				</div>
-			{/each}
-		</div>
-
-		<div class="mt-16 rounded-2xl p-8 text-center" style="background-color: {colors.primary}11">
-			<h4 class="mb-4 text-xl font-bold" style="color: {colors.primary}">Need Assistance?</h4>
-			<p class="mb-6" style="color: {colors.text}">
-				All related office visits, medical evaluations, and study medication are provided at no
-				charge. Financial compensation for time and travel may be provided.
-			</p>
-			<div class="flex flex-col justify-center gap-4 sm:flex-row">
-				<a
-					href="tel:01908032992"
-					class="flex items-center justify-center gap-2 font-bold"
-					style="color: {colors.primary}"
-				>
-					<Phone class="h-5 w-5" /> 01908 032992
-				</a>
-				<span class="hidden text-gray-300 sm:block">|</span>
-				<a
-					href="https://stemaxconsult.com/contact-us"
-					class="flex items-center justify-center gap-2 font-bold"
-					style="color: {colors.primary}"
-				>
-					<ClipboardCheck class="h-5 w-5" /> General Interest Form
-				</a>
+				{/each}
 			</div>
 		</div>
 	</div>
