@@ -3,35 +3,27 @@
 	import Header from '$lib/components/Header.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 
-	import { page } from '$app/stores';
+	// Import state instead of stores
+	import { page } from '$app/state';
 	import { beforeNavigate, goto } from '$app/navigation';
 
 	let { children } = $props();
 
 	beforeNavigate(({ to, cancel, type }) => {
-		// 1. Only intercept physical link clicks (ignore browser back button or programmatic gotos)
 		if (type !== 'link') return;
 
-		// 2. Grab the current region from the URL
-		const currentRegion = $page.params.region;
-		if (!currentRegion) return;
-
-		// 3. Ignore external links (SvelteKit sets 'to' as null for external navigation)
-		if (!to || !to.url) return;
+		// No '$' prefix needed
+		const currentRegion = page.params.region;
+		if (!currentRegion || !to || !to.url) return;
 
 		const validRegions = ['gb', 'usa', 'eu'];
 		const firstPathSegment = to.url.pathname.split('/')[1];
 
-		// 4. If the destination link already includes a valid region prefix, let it proceed naturally
 		if (validRegions.includes(firstPathSegment)) return;
 
-		// 5. Cancel SvelteKit's default navigation attempt
 		cancel();
 
-		// 6. Prepend the current region to the path, keeping any search queries or #hashes intact
 		const newPath = `/${currentRegion}${to.url.pathname === '/' ? '' : to.url.pathname}${to.url.search}${to.url.hash}`;
-
-		// 7. Route to the corrected URL seamlessly
 		goto(newPath);
 	});
 </script>

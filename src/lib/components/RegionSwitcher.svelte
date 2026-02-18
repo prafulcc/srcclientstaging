@@ -1,5 +1,5 @@
 <script>
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
 	import { colors } from '$lib/data.js';
 
@@ -9,11 +9,33 @@
 		{ code: 'eu', label: 'EU', flag: '🇪🇺' }
 	];
 
-	// Svelte 5 runes
-	let currentRegion = $derived($page.params.region);
+	let currentRegion = $derived(page.params.region);
+	let guessedRegion = $derived(page.data.guessedRegion);
+
 	let pendingRegion = $state(null);
 	let dialogRef = $state();
 	let isChanging = $state(false);
+
+	$effect(() => {
+		const hasPrompted = sessionStorage.getItem('regionPrompted');
+
+		// Only prompt if they haven't been asked AND they are in a mismatched region
+		if (!hasPrompted && guessedRegion && currentRegion) {
+			if (currentRegion !== guessedRegion) {
+				const targetRegion = regions.find((r) => r.code === guessedRegion);
+
+				if (targetRegion) {
+					const timer = setTimeout(() => {
+						pendingRegion = targetRegion;
+						dialogRef.showModal();
+						sessionStorage.setItem('regionPrompted', 'true');
+					}, 800);
+
+					return () => clearTimeout(timer);
+				}
+			}
+		}
+	});
 
 	function handleRegionClick(e, region) {
 		if (region.code === currentRegion) return;
