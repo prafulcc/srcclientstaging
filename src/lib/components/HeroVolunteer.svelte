@@ -35,7 +35,7 @@
 					<h1 class="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
 						<span class="block text-white">Make a Difference & </span>
 						<span class="block text-white">
-							Get Paid To Advance <br class="md:hidden" />
+							Help Advance <br class="md:hidden" />
 
 							<span class="inline-grid text-emerald-400">
 								{#key index}

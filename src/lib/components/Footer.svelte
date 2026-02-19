@@ -8,7 +8,7 @@
 	const siteLinks = [
 		{ label: 'Pharmacovigilance', href: '/clinical-research-services#pharmacovigilance-solutions' },
 		{ label: 'Research Services', href: '/clinical-research-services#clinical-research-services' },
-		{ label: 'Volunteer in a Trial', href: '/volunteer-paid-clinical-trials' },
+		{ label: 'Volunteer in a Trial', href: '/volunteer-for-clinical-trials' },
 		{ label: 'Locate Clinic', href: '#location' },
 		{ label: 'Careers', href: '/' }
 	];

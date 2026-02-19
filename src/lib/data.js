@@ -1,10 +1,20 @@
-import { Rocket, Users, ShieldCheck, Database, MapPinPlus, Gavel } from '@lucide/svelte';
+import {
+	ShieldCheck,
+	Building,
+	HeartHandshake,
+	FileCheck,
+	FlaskConical,
+	Globe,
+	BarChart
+} from '@lucide/svelte';
 
 export const partnerLogos = [
 	{ name: 'Moderna', src: '/logos/moderna.png' },
 	{ name: 'Biohaven', src: '/logos/biohaven-pharmaceuticals.png' },
 	{ name: 'Accelsiors', src: '/logos/accelsiors.png' },
-	{ name: 'CRPN', src: '/logos/clinical-research-payment-network.png' }
+	{ name: 'CRPN', src: '/logos/clinical-research-payment-network.png' },
+	{ name: 'Sanofi', src: '/logos/sanofi.svg' },
+	{ name: 'Inato', src: '/logos/inato.webp' }
 ];
 
 export const regulatoryLogos = [
@@ -24,13 +34,21 @@ export const regulatoryLogos = [
 		name: 'NHS HRA',
 		src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Health_Research_Authority_logo.svg/1280px-Health_Research_Authority_logo.svg.png'
 	},
+	// {
+	// 	name: 'NICE',
+	// 	src: 'https://www.hdruk.ac.uk/wp-content/uploads/2024/01/NICE-logo-e1704811229663.png'
+	// },
+	// {
+	// 	name: 'OHRP',
+	// 	src: 'https://www.hhs.gov/ohrp/sites/default/files/ohrp-logo191.png'
+	// },
 	{
-		name: 'NICE',
-		src: 'https://www.hdruk.ac.uk/wp-content/uploads/2024/01/NICE-logo-e1704811229663.png'
+		name: 'ISO',
+		src: '/iso.avif'
 	},
 	{
-		name: 'OHRP',
-		src: 'https://www.hhs.gov/ohrp/sites/default/files/ohrp-logo191.png'
+		name: 'HIPAA',
+		src: '/hipaa.avif'
 	}
 ];
 
@@ -46,185 +64,237 @@ export const colors = {
 };
 
 // Centralized clinical research services data
+// Exported services broken down into granular Site Management and Late Phase categories
 export const services = {
-	'study-startup': [
+	'site-selection-activation': [
 		{
-			name: 'Assisted trial design',
+			name: 'Site Identification and Profiling',
 			details:
-				'Strategic consultation to optimize your study endpoints and methodology for maximum clinical impact.'
+				'Utilizing data-driven feasibility assessments to pinpoint high-performing sites and ideal patient populations.',
+			image: 'https://unsplash.com/photos/gUFQybn_CVg/download?force=true&w=1920'
 		},
 		{
-			name: 'Protocol writing',
+			name: 'Site Qualification Visits (SQV)',
 			details:
-				'Developing scientifically rigorous and regulatory-compliant protocols tailored to your specific therapeutic area.'
+				'Conducting thorough evaluations of facility infrastructure, staff expertise, and equipment capabilities.',
+			image: 'https://unsplash.com/photos/BGbLDm77t0M/download?force=true&w=1920'
 		},
 		{
-			name: 'Site feasibility, selection, training and initiation',
+			name: 'Investigator and KOL Engagement',
 			details:
-				'Identifying high-performing sites and ensuring teams are fully equipped to meet enrollment and safety targets.'
+				'Building strong relationships with Key Opinion Leaders and principal investigators to drive study success.',
+			image: 'https://unsplash.com/photos/jm2XIuyvh4A/download?force=true&w=1920'
 		},
 		{
-			name: 'IRB/ethics and regulatory submissions',
+			name: 'IRB/Ethics and Regulatory Submissions',
 			details:
-				'Navigating complex global submission pathways to secure rapid approvals and maintain study timelines.'
+				'Managing localized ethics committee approvals and regulatory documentation for rapid site activation.',
+			image: 'https://unsplash.com/photos/eXcF6L9pEug/download?force=true&w=1920'
 		},
 		{
-			name: 'CTMS configuration and UAT',
+			name: 'Site Initiation Visits (SIV) and Training',
 			details:
-				'Setting up robust Clinical Trial Management Systems with thorough User Acceptance Testing for flawless operations.'
-		},
-		{
-			name: 'Study plans',
-			details:
-				'Crafting detailed operational roadmaps that align stakeholders and define clear paths to project milestones.'
+				'Ensuring all site personnel are fully trained on study protocols, GCP, and electronic systems before trial commencement.',
+			image: 'https://unsplash.com/photos/7Z2Xf8Bb7iM/download?force=true&w=1920'
 		}
 	],
-	'patient-recruitment': [
+	'site-monitoring-oversight': [
 		{
-			name: 'EMR databank querying',
+			name: 'Risk-Based Monitoring (RBM)',
 			details:
-				'Utilizing advanced Electronic Medical Record data to identify eligible participants with precision and speed.'
+				'Implementing adaptive, centralized monitoring strategies to identify and mitigate risks proactively.',
+			image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit'
 		},
 		{
-			name: 'Central digital advertising',
+			name: 'Interim Monitoring Visits (IMV)',
 			details:
-				'Running targeted multi-channel campaigns to reach diverse patient populations across digital platforms.'
+				'Conducting regular on-site or remote visits to verify source data, assess protocol compliance, and resolve queries.',
+			image: 'https://images.unsplash.com/photo-1584432810601-6c7f27d2362b?auto=format&fit'
 		},
 		{
-			name: 'On-site patient recruitment',
+			name: 'Source Data Verification (SDV) & Review (SDR)',
 			details:
-				'Deploying specialist teams directly to clinical sites to facilitate face-to-face engagement and enrollment.'
+				'Ensuring absolute data integrity by cross-referencing EDC entries with original patient records.',
+			image: 'https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit'
 		},
 		{
-			name: 'Study websites and marketing materials',
+			name: 'IMP and Clinical Supply Accountability',
 			details:
-				'Designing patient-centric digital portals and high-quality printed materials to boost trial visibility.'
+				'Overseeing the secure storage, dispensing, and tracking of Investigational Medicinal Products at the site level.',
+			image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit'
 		},
 		{
-			name: 'Patient concierge',
+			name: 'Protocol Deviation Management',
 			details:
-				'Providing dedicated support to participants to reduce burden and improve long-term study retention.'
-		},
-		{
-			name: 'Pre-screening',
-			details:
-				'Implementing rigorous initial vetting processes to ensure only the most qualified candidates reach the site.'
+				'Identifying, documenting, and implementing corrective and preventive actions (CAPA) for any protocol deviations.',
+			image: ''
 		}
 	],
-	'study-management': [
+	'site-patient-support': [
 		{
-			name: 'Project management',
+			name: 'Site-Specific Recruitment Planning',
 			details:
-				'Proactive oversight of timelines, budgets, and resources to keep your clinical trial on track and within scope.'
+				'Developing localized patient outreach strategies tailored to the unique demographics of each site.',
+			image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit'
 		},
 		{
-			name: 'Monitoring',
-			details:
-				'Comprehensive clinical monitoring to ensure data integrity and strict adherence to GCP standards.'
+			name: 'Patient Concierge and Travel Services',
+			details: 'Reducing dropout rates by managing participant travel, and stipend reimbursements.',
+			image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit'
 		},
 		{
-			name: 'Vendor management',
+			name: 'Community Practice and GP Integration',
 			details:
-				'Seamless coordination with IMP providers, central labs, and IRT vendors for integrated trial delivery.'
+				'Expanding trial access by integrating local primary care physicians and community clinics into the site network.',
+			image: 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit'
 		},
 		{
-			name: 'TMF management',
+			name: 'Pre-Screening and Enrollment Tracking',
 			details:
-				'Maintaining a complete and "inspection-ready" Trial Master File throughout the entire study lifecycle.'
-		},
-		{
-			name: 'Pharmacovigilance',
-			details:
-				'Continuous safety monitoring and reporting to protect participant well-being and meet regulatory duties.'
-		},
-		{
-			name: 'Medical monitoring',
-			details:
-				'Expert medical oversight to provide real-time guidance on safety signals and eligibility queries.'
+				'Implementing robust initial vetting processes to ensure only highly qualified candidates reach the randomization phase.',
+			image: 'https://images.unsplash.com/photo-1555421689-d68471e189f2?auto=format&fit'
 		}
 	],
-	'data-management': [
+	'site-closeout-qa': [
 		{
-			name: 'Database locks',
+			name: 'Site Close-Out Visits (COV)',
 			details:
-				'Executing timely and accurate database locks to prepare your data for final analysis and reporting.'
+				'Managing the final reconciliation of data, drug supplies, and documentation to officially close trial sites.',
+			image: 'https://images.unsplash.com/photo-1618044733300-9472054094ee?auto=format&fit'
 		},
 		{
-			name: 'Data delivery in CDISC SDTM-like format',
+			name: 'Database Lock Preparation',
 			details:
-				'Providing high-quality datasets structured for immediate submission to global regulatory authorities.'
+				'Collaborating with data management teams to accelerate query resolution and ensure a clean, timely database lock.',
+			image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit'
 		},
 		{
-			name: 'Data standardization',
+			name: 'Inspection Readiness and Auditing',
 			details:
-				'Harmonizing disparate data sources into a unified, consistent format for cleaner analysis.'
+				'Conducting mock audits and comprehensive QC checks to ensure sites are fully prepared for regulatory inspections.',
+			image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit'
 		},
 		{
-			name: 'Biostatistics and Programming',
+			name: 'eTMF Reconciliation',
 			details:
-				'Advanced statistical modeling and programming to extract meaningful insights from your clinical data.'
+				'Verifying that the electronic Trial Master File is complete, accurate, and inspection-ready at the site level.',
+			image: 'https://images.unsplash.com/photo-1606857521015-7f9fcf423740?auto=format&fit'
 		},
 		{
-			name: 'Medical writing',
+			name: 'Investigator Payment Management',
 			details:
-				'Crafting clear, professional Clinical Study Reports (CSRs) and summaries for regulatory review.'
+				'Automating and tracking accurate, milestone-based financial reimbursements to sites and investigators.',
+			image: 'https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit'
 		}
 	],
-	'site-management': [
+	'phase-iv-clinical-trials': [
 		{
-			name: 'On-site Principal Investigators and Clinical Research Coordinators',
+			name: 'Phase IIIb/IV Pragmatic Trials',
 			details:
-				'Providing experienced clinical leadership and staff to manage day-to-day trial activities effectively.'
+				'Designing large-scale, post-approval studies to gather safety and efficacy data in real-world clinical settings.',
+			image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit'
 		},
 		{
-			name: 'Local Primary Care Physician and GP Sites',
+			name: 'Label Extension Studies',
 			details:
-				'Expanding your reach by leveraging community-based medical practices for broader accessibility.'
+				'Generating robust clinical evidence required by regulatory bodies to expand a product’s approved indications.',
+			image: ''
 		},
 		{
-			name: 'Speciality Sites',
+			name: 'Post-Marketing Safety Surveillance',
 			details:
-				'Accessing specialized expertise across Neurology, Dermatology, Endocrinology, and other therapeutic areas.'
+				'Conducting continuous pharmacovigilance to detect, monitor, and report long-term or rare adverse events.',
+			image: ''
 		},
 		{
-			name: 'Mobile Phlebotomy and Nursing',
+			name: 'Comparative Effectiveness Research (CER)',
 			details:
-				'Bringing the trial to the patient with mobile services to increase convenience and data quality.'
+				'Evaluating how a new therapy compares to existing standard-of-care treatments in real-world scenarios.',
+			image: 'https://images.unsplash.com/photo-1576671081837-49000212a370?auto=format&fit'
+		},
+		{
+			name: 'Compassionate Use and Early Access Programs',
+			details:
+				'Managing ethical pathways to provide pre-approval access to experimental drugs for patients with unmet medical needs.',
+			image: 'https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit'
 		}
 	],
-	'regulatory-affairs': [
+	'observational-rwe': [
 		{
-			name: 'Legal Representation within the UK, USA and EU',
+			name: 'Non-Interventional Cohort Studies',
 			details:
-				'Acting as your authorized legal representative to ensure compliance for foreign-sponsored trials.'
+				'Executing prospective observational studies where patients are treated according to standard clinical practice.',
+			image: 'https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?auto=format&fit'
 		},
 		{
-			name: 'Health Authority Interface',
+			name: 'Retrospective Chart Reviews',
 			details:
-				'Managing all communications and negotiations with agencies like the FDA, EMA, and MHRA.'
+				'Analyzing existing medical records and historical data to identify treatment patterns and historical control cohorts.',
+			image: 'https://images.unsplash.com/photo-1568227451433-a3d8b5211915?auto=format&fit'
 		},
 		{
-			name: 'Response Management',
+			name: 'Disease and Product Registries',
 			details:
-				'Coordinating rapid, technical responses to health authority queries to prevent trial delays.'
+				'Building and managing longitudinal databases to track patient outcomes, disease progression, and long-term safety.',
+			image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit'
 		},
 		{
-			name: 'Approval Tracking',
+			name: 'Electronic Health Record (EHR) Analytics',
 			details:
-				'Monitoring global regulatory statuses in real-time to provide clarity on your market entry timeline.'
+				'Extracting and standardizing vast amounts of unstructured healthcare data to generate actionable Real-World Evidence.',
+			image: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit'
+		},
+		{
+			name: 'Wearable and ePRO Integration',
+			details:
+				'Collecting continuous, real-time physiological data and patient-reported outcomes outside of traditional clinical settings.',
+			image: 'https://images.unsplash.com/photo-1575316315890-410a7248e3d6?auto=format&fit'
+		}
+	],
+	'health-economics-outcomes': [
+		{
+			name: 'Health Economics and Outcomes Research (HEOR)',
+			details:
+				'Generating economic models and value dossiers to support pricing, reimbursement, and market access strategies.',
+			image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit'
+		},
+		{
+			name: 'Quality of Life (QoL) Assessments',
+			details:
+				"Validating and analyzing the direct impact of therapies on patients' daily lives and overall wellbeing.",
+			image: 'https://images.unsplash.com/photo-1505576399279-565b52d4ac71?auto=format&fit'
+		},
+		{
+			name: 'Post-Authorization Safety Studies (PASS)',
+			details:
+				'Fulfilling mandatory regulatory requirements to evaluate specific safety concerns post-approval.',
+			image: 'https://images.unsplash.com/photo-1585435557343-3b092031a831?auto=format&fit'
+		},
+		{
+			name: 'Post-Authorization Efficacy Studies (PAES)',
+			details:
+				'Collecting supplementary data to confirm the ongoing efficacy of a drug within the general population.',
+			image: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit'
+		},
+		{
+			name: 'Cost-Effectiveness Analysis',
+			details:
+				'Demonstrating the economic value of a therapy to healthcare payers, HTA bodies, and formulary committees.',
+			image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit'
 		}
 	]
 };
 
-// Service categories for UI display, updated with icons
+// Service categories for UI display, updated with relevant icons
 export const serviceCategories = [
 	{ id: 'all', label: 'All Services' },
-	{ id: 'study-startup', label: 'Study Startup', icon: Rocket },
-	{ id: 'patient-recruitment', label: 'Patient Recruitment', icon: Users },
-	{ id: 'study-management', label: 'Study Management', icon: ShieldCheck },
-	{ id: 'data-management', label: 'Data Management', icon: Database },
-	{ id: 'site-management', label: 'Site Management', icon: MapPinPlus },
-	{ id: 'regulatory-affairs', label: 'Regulatory Affairs', icon: Gavel }
+	{ id: 'site-selection-activation', label: 'Site Selection & Activation', icon: Building },
+	{ id: 'site-monitoring-oversight', label: 'Site Monitoring & Oversight', icon: ShieldCheck },
+	{ id: 'site-patient-support', label: 'Site Patient Support', icon: HeartHandshake },
+	{ id: 'site-closeout-qa', label: 'Site Close-Out & QA', icon: FileCheck },
+	{ id: 'phase-iv-clinical-trials', label: 'Phase IIIb/IV Trials', icon: FlaskConical },
+	{ id: 'observational-rwe', label: 'Observational & RWE', icon: Globe },
+	{ id: 'health-economics-outcomes', label: 'Health Economics (HEOR)', icon: BarChart }
 ];
 
 // Helper function to get category label from category ID dynamically

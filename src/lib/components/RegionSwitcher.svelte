@@ -6,7 +6,10 @@
 	const regions = [
 		{ code: 'gb', label: 'UK', flag: '🇬🇧' },
 		{ code: 'usa', label: 'USA', flag: '🇺🇸' },
-		{ code: 'eu', label: 'EU', flag: '🇪🇺' }
+		{ code: 'eu', label: 'EU', flag: '🇪🇺' },
+		{ code: 'ng', label: 'NG', flag: '🇳🇬' },
+		{ code: 'ke', label: 'KE', flag: '🇰🇪' },
+		{ code: 'za', label: 'ZA', flag: '🇿🇦' }
 	];
 
 	let currentRegion = $derived(page.params.region);

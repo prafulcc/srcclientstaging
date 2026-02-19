@@ -6,7 +6,6 @@
 </script>
 
 <Hero />
-
 <ServiceSection />
 <PVFSection />
 <Location />

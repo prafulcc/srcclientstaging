@@ -22,7 +22,7 @@
 		},
 		{
 			label: 'Volunteer In A Trial',
-			href: '/volunteer-paid-clinical-trials'
+			href: '/volunteer-for-clinical-trials'
 		},
 		{
 			label: 'Locate Clinic',

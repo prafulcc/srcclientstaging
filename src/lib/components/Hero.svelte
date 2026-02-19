@@ -4,7 +4,14 @@
 	// Define primary color scheme based on emerald green [cite: 1]
 	import { colors } from '$lib/data.js';
 
-	const markets = ['The 🇬🇧 Market', 'The 🇪🇺 Market', 'The 🇺🇸 Market'];
+	const markets = [
+		'The 🇬🇧 Market',
+		'The 🇪🇺 Market',
+		'The 🇺🇸 Market',
+		'The 🇳🇬 Market',
+		'The 🇰🇪 Market',
+		'The 🇿🇦 Market'
+	];
 	let index = 0;
 
 	onMount(() => {

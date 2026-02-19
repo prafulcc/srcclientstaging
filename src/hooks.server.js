@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 
-const validRegions = ['gb', 'usa', 'eu'];
+const validRegions = ['gb', 'usa', 'eu', 'ng, ke', 'za'];
 const euCountries = [
 	'FR',
 	'DE',
